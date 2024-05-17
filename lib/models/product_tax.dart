@@ -1,14 +1,14 @@
-class Category {
+class ProductTax {
   final int? id;
   final String name;
+  final double percentage;
   final DateTime createdAt;
-  final String categoryType;
 
-  Category({
+  ProductTax({
     this.id,
     required this.name,
     DateTime? createdAt,
-    required this.categoryType,
+    required this.percentage,
   }): createdAt = createdAt ?? DateTime.now();
 
   Map<String, dynamic> toMap() {
@@ -16,18 +16,16 @@ class Category {
       'id': id,
       'name': name,
       'createdAt': createdAt,
-      'categoryType': categoryType
+      'percentage': percentage,
     };
   }
 
-  factory Category.fromMap(Map<String, dynamic> map) {
-    return Category(
+  factory ProductTax.fromMap(Map<String, dynamic> map) {
+    return ProductTax(
       id: map['id'],
       name: map['name'],
       createdAt: map['createdAt'],
-      categoryType: map['categoryType'],
+      percentage: map['percentage'],
     );
   }
 }
-
-// TODO: type: raw material, finished products, service
