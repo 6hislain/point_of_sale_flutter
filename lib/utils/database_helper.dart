@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:sqflite_common_ffi/sqflite_common_ffi.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import '../models/user.dart';
 import '../models/category.dart';
@@ -27,7 +27,7 @@ class DatabaseHelper {
       sqfliteFfiInit();
       final databaseFactory = databaseFactoryFfi;
       final appDocumentsDir = await getApplicationDocumentsDirectory();
-      final dbPath = join(appDocumentsDir.path, 'databases'. 'data.db');
+      final dbPath = join(appDocumentsDir.path, 'pos.db');
       final winLinuxDB = await databaseFactory.openDatabase(
         dbPath,
         options: OpenDatabaseOptions(
@@ -38,12 +38,9 @@ class DatabaseHelper {
       return winLinuxDB;
     }
     final documentsDirectory = await getApplicationDocumentsDirectory();
-    final path = join(documentsDirectory.path, 'data.db');
-    final iOSAndroidDB = await openDatabase(
-      path,
-      version: 1,
-      onCreate: _onCreate
-    );
+    final path = join(documentsDirectory.path, 'pos.db');
+    final iOSAndroidDB =
+        await openDatabase(path, version: 1, onCreate: _onCreate);
     return iOSAndroidDB;
   }
 
@@ -89,9 +86,9 @@ class DatabaseHelper {
     return await db.delete(table, where: 'id = ?', whereArgs: [id]);
   }
 
-  Future<int> insertUser(User user) => insert('users', user.toMap());
-  Future<List<User>> getUsers({int? limit, int? offset}) =>
-      getAll('users', (map) => User.fromMap(map), limit: limit, offset: offset);
-  Future<int> updateUser(User user) => update('users', user.toMap(), user.id!);
-  Future<int> deleteUser(int id) => delete('users', id);
+  // Future<int> insertUser(User user) => insert('users', user.toMap());
+  // Future<List<User>> getUsers({int? limit, int? offset}) =>
+  //     getAll('users', (map) => User.fromMap(map), limit: limit, offset: offset);
+  // Future<int> updateUser(User user) => update('users', user.toMap(), user.id!);
+  // Future<int> deleteUser(int id) => delete('users', id);
 }

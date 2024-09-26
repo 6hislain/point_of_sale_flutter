@@ -1,4 +1,4 @@
-# point_of_sale_flutter
+# Point of Sale
 
 A new Flutter project.
 

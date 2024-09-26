@@ -1,6 +1,6 @@
 {
-    "name": "point_of_sale_flutter",
-    "short_name": "point_of_sale_flutter",
+    "name": "point_of_sale",
+    "short_name": "point_of_sale",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
